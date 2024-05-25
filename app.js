@@ -13,8 +13,13 @@ app.set('view engine', 'ejs');
 
 //Routes
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', { title: 'Home'});
 });
+
+//Middleware
+app.use((req,res) =>{
+    res.status(404).render('error')
+})
 
 /*
 const flights = await fetchFromRadar(46.57, 13.41, 42.03, 19.51)
