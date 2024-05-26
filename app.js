@@ -16,6 +16,15 @@ app.get('/', (req, res) => {
     res.render('index', { title: 'Home'});
 });
 
+app.get('/api/flights', async (req, res) => {
+    try {
+      const flights = await fetchFromRadar(46.57, 13.41, 42.03, 19.51);
+      res.json(flights);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch flight data' });
+    }
+  });
+
 //Middleware
 app.use((req,res) =>{
     res.status(404).render('error')
